@@ -6,7 +6,6 @@ import android.os.AsyncTask;
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
-import androidx.room.RoomDatabase;
 
 import java.util.List;
 
@@ -26,6 +25,7 @@ public class UsersViewModel extends AndroidViewModel {
     LiveData<List<User>>getAllUsers(){
         return mUserLists;
     }
+
 
     public void insert(User user) {
         new InsertAsyncTask(userDao).execute(user);

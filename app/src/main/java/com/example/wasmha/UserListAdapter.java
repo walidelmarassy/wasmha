@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ public class UserListAdapter extends RecyclerView.Adapter< UserListAdapter.UserV
     private LayoutInflater layoutInflater;
     private Context mcontext;
     private List<User>musers;
+    private List<Emoji>memojis;
 
     public UserListAdapter(Context context) {
         layoutInflater=LayoutInflater.from(context);
@@ -35,6 +37,12 @@ public class UserListAdapter extends RecyclerView.Adapter< UserListAdapter.UserV
         if (musers!=null){
             User user=musers.get(position);
             holder.setData(user.getMuser(),position);
+
+        }
+        else if(memojis!=null){
+            Emoji emoji=memojis.get(position);
+            holder.emojiitemview.setImageResource(emoji.getMemoji());
+
         }
         else {
             holder.useritemview.setText("nodata");
@@ -45,25 +53,39 @@ public class UserListAdapter extends RecyclerView.Adapter< UserListAdapter.UserV
     @Override
     public int getItemCount() {
         if (musers!=null)
-            return musers.size();
-        return 0;
+        return musers.size();
+        else if (memojis!=null)
+            return memojis.size();
+        else return 0;
+
+
     }
     public void setUsers(List<User>users){
         musers=users;
         notifyDataSetChanged();
     }
+    public void setEmojis(List<Emoji>emojis){
+        memojis=emojis;
+        notifyDataSetChanged();
+    }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
         private TextView useritemview;
+        private ImageView emojiitemview;
         private int mposition;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);
             useritemview=itemView.findViewById(R.id.text);
+            emojiitemview=itemView.findViewById(R.id.image);
+
         }
         public void setData(String user,int position){
             useritemview.setText(user);
             mposition=position;
         }
+
+
+        }
     }
-}
+

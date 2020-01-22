@@ -9,7 +9,6 @@ import androidx.room.RoomDatabase;
 
 public abstract class UserRoomDatabase extends RoomDatabase {
     public abstract UserDao userDao();
-
     private static volatile UserRoomDatabase userRoomInstance;
 
     static UserRoomDatabase getDatabase(final Context context) {
